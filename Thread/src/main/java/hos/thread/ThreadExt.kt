@@ -1,6 +1,7 @@
 package hos.thread
 
 import hos.thread.executor.ThreadTaskExecutor
+import java.util.concurrent.Future
 
 /**
  * <p>Title: Ok </p>
@@ -11,7 +12,6 @@ import hos.thread.executor.ThreadTaskExecutor
  * @date : 2020/7/21 21:48
  * @version : 1.0
  */
-
 
 
 fun thread(): ThreadTaskExecutor {
@@ -47,6 +47,11 @@ fun postOnMain(run: () -> Unit) {
     thread().postOnMain { run() }
 }
 
+fun submit(task: () -> Runnable): Future<*> {
+    return thread().submit { task() }
+}
+
 fun isMainThread(): Boolean {
     return thread().isMainThread
 }
+
